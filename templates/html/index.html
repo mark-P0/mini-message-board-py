@@ -9,7 +9,7 @@
   </head>
 
   <body class="min-h-screen grid place-items-center">
-    <main class="min-w-[32rem] bg-neutral-200 p-3">
+    <main class="min-w-[32rem] bg-neutral-200 p-3 space-y-4">
       <ul>
         {% for message in messages %}
         <li>
@@ -21,6 +21,10 @@
         </li>
         {% endfor %}
       </ul>
+
+      <footer class="flex flex-row-reverse">
+        <a href="/new" class="underline underline-offset-2">Send Message</a>
+      </footer>
     </main>
   </body>
 </html>
