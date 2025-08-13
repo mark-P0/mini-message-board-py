@@ -5,6 +5,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from pydantic import BaseModel
 
 from app.db.messages import Message
+from app.exceptions import NotFoundException
 from app.routes.paths import RoutePath
 from app.routes.router import IndexRouter
 from app.templates import (
@@ -37,12 +38,12 @@ class NewMessageRoute:
         return RoutePath.INDEX
 
 
-class NotFoundException(Exception): ...
-
-
 @app.exception_handler(NotFoundException)
 def not_found(*_):
-    return HTMLResponse(content=NotFoundTemplate.render())
+    return HTMLResponse(
+        status_code=status.HTTP_404_NOT_FOUND,
+        content=NotFoundTemplate.render(),
+    )
 
 
 @app.get(RoutePath.Messages.NEW, response_class=HTMLResponse)
