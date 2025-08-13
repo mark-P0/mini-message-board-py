@@ -1,7 +1,7 @@
 import typing as T
 
-from fastapi import FastAPI, Form
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI, Form, status
+from fastapi.responses import HTMLResponse, RedirectResponse
 from pydantic import BaseModel
 
 from messages import add_message, messages
@@ -15,19 +15,18 @@ class NewMessageRoute:
         user: str
         text: str
 
-    class ResponseBody(BaseModel):
-        message: str
-
     RequestBody = T.Annotated[RequestBodyRaw, Form()]
 
     @staticmethod
-    @app.post("/new")
-    def new_message(body: RequestBody) -> ResponseBody:
+    @app.post(
+        "/new",
+        response_class=RedirectResponse,
+        status_code=status.HTTP_303_SEE_OTHER,
+    )
+    def new_message(body: RequestBody):
         add_message(user=body.user, text=body.text)
 
-        return NewMessageRoute.ResponseBody(
-            message="Message added successfully",
-        )
+        return "/"
 
 
 @app.get("/", response_class=HTMLResponse)
