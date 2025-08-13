@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {{ message['user'] }} on {{ message['added'] }} said... | Mini
+      Messageboard
+    </title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="min-h-screen grid place-items-center">
+    <main class="min-w-[32rem] bg-neutral-200 p-3 space-y-4">
+      <a href="/" class="underline underline-offset-4 text-sm">
+        Back to messages
+      </a>
+
+      <blockquote class="space-y-1">
+        <p class="text-neutral-500 text-sm italic">
+          <span class="font-bold">{{ message['user'] }}</span> on
+          <span class="font-bold">{{ message['added'] }}</span> said...
+        </p>
+
+        <p>{{ message['text'] }}</p>
+      </blockquote>
+
+      <hr class="border-neutral-400" />
+
+      <details class="space-y-2">
+        <summary class="text-sm">Breakdown</summary>
+
+        <dl class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
+          <div class="col-span-2 grid grid-cols-subgrid">
+            <dt class="font-bold">Date:</dt>
+            <dd>{{ message['added'] }}</dd>
+          </div>
+          <div class="col-span-2 grid grid-cols-subgrid">
+            <dt class="font-bold">From:</dt>
+            <dd>{{ message['user'] }}</dd>
+          </div>
+          <div class="col-span-2 grid grid-cols-subgrid">
+            <dt class="font-bold">Message:</dt>
+            <dd>{{ message['text'] }}</dd>
+          </div>
+        </dl>
+      </details>
+    </main>
+  </body>
+</html>

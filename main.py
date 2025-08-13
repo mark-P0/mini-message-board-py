@@ -4,9 +4,10 @@ from fastapi import FastAPI, Form, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from pydantic import BaseModel
 
-from db.messages import add_message, messages
+from db.messages import add_message, get_message, messages
 from templates.templates import (
     IndexTemplate,
+    MessageDetailsTemplate,
     NewMessageTemplate,
     NotFoundTemplate,
 )
@@ -58,3 +59,12 @@ def show_messages():
 @app.get("/new", response_class=HTMLResponse)
 def show_new_message_form():
     return NewMessageTemplate.render()
+
+
+@app.get("/messages/{message_id}", response_class=HTMLResponse)
+def show_message(message_id: str):
+    message = get_message(message_id)
+    if message is None:
+        raise NotFoundException()
+
+    return MessageDetailsTemplate.render(message=message)

@@ -48,3 +48,14 @@ class NewMessageTemplate:
     @classmethod
     def render(cls, **kwargs: T.Unpack[Context]):
         return render_template(cls.name, **kwargs)
+
+
+class MessageDetailsTemplate:
+    name = "message-details.html"
+
+    class Context(T.TypedDict):
+        message: Message
+
+    @classmethod
+    def render(cls, **kwargs: T.Unpack[Context]):
+        return render_template(cls.name, **kwargs)
