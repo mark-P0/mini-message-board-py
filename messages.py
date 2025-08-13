@@ -27,3 +27,13 @@ const messages = {
   }
 ```
 """
+
+
+def add_message(*, user: str, text: str):
+    messages.append(
+        Message(
+            user=user,
+            text=text,
+            added=datetime.datetime.now(),
+        )
+    )
