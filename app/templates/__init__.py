@@ -4,11 +4,11 @@ https://jinja.palletsprojects.com/en/stable/api/#basics
 
 import typing as T
 
-from jinja2 import Environment, FileSystemLoader, select_autoescape
+from jinja2 import Environment, PackageLoader, select_autoescape
 
 from app.db.messages import Message
 
-env_loader = FileSystemLoader("./app/templates/html")
+env_loader = PackageLoader(package_name="app.templates", package_path="html")
 env = Environment(loader=env_loader, autoescape=select_autoescape())
 
 
