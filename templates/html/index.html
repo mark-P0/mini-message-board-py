@@ -8,17 +8,19 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
-  <body>
-    <ul>
-      {% for message in messages %}
-      <li>
-        <code class="text-xs text-neutral-400 mr-2">
-          {{ message['added'] }}
-        </code>
-        <span class="font-bold"> {{ message['user'] }}: </span>
-        <span> {{ message['text'] }} </span>
-      </li>
-      {% endfor %}
-    </ul>
+  <body class="min-h-screen grid place-items-center">
+    <main class="min-w-[32rem] bg-neutral-200 p-3">
+      <ul>
+        {% for message in messages %}
+        <li>
+          <code class="text-xs text-neutral-400 mr-2">
+            {{ message['added'] }}
+          </code>
+          <span class="font-bold"> {{ message['user'] }}: </span>
+          <span> {{ message['text'] }} </span>
+        </li>
+        {% endfor %}
+      </ul>
+    </main>
   </body>
 </html>

@@ -9,25 +9,22 @@
   </head>
 
   <body class="min-h-screen grid place-items-center">
-    <form
-      method="POST"
-      action="/new"
-      class="max-w-md bg-neutral-200 p-3 space-y-4"
-    >
-      <div class="grid grid-cols-[1fr_2fr] gap-2">
-        <label class="col-span-2 grid grid-cols-subgrid items-center">
-          <span class="text-right font-bold">User: </span>
-          <input type="text" name="user" class="px-2 py-1" />
-        </label>
-        <label class="col-span-2 grid grid-cols-subgrid items-center">
-          <span class="text-right font-bold">Message: </span>
-          <input type="text" name="text" class="px-2 py-1" />
-        </label>
-      </div>
-
-      <footer class="flex flex-row-reverse">
-        <button class="bg-neutral-300 px-4 py-2">Submit</button>
-      </footer>
-    </form>
+    <main class="min-w-[32rem] bg-neutral-200 p-3">
+      <form method="POST" action="/new" class="space-y-4">
+        <div class="grid grid-cols-[1fr_3fr] gap-2">
+          <label class="col-span-2 grid grid-cols-subgrid items-center">
+            <span class="text-right font-bold">User: </span>
+            <input type="text" name="user" class="px-2 py-1" />
+          </label>
+          <label class="col-span-2 grid grid-cols-subgrid items-center">
+            <span class="text-right font-bold">Message: </span>
+            <input type="text" name="text" class="px-2 py-1" />
+          </label>
+        </div>
+        <footer class="flex flex-row-reverse">
+          <button class="bg-neutral-300 px-4 py-2">Submit</button>
+        </footer>
+      </form>
+    </main>
   </body>
 </html>
