@@ -4,7 +4,7 @@ from fastapi import FastAPI, Form, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from pydantic import BaseModel
 
-from .db.messages import add_message, get_message, messages
+from .db.messages import add_message, get_all_messages, get_message
 from .templates import (
     IndexTemplate,
     MessageDetailsTemplate,
@@ -51,9 +51,9 @@ def show_messages():
     https://fastapi.tiangolo.com/advanced/templates/#using-jinja2templates
     """
 
-    return IndexTemplate.render(
-        messages=messages,
-    )
+    messages = get_all_messages()
+
+    return IndexTemplate.render(messages=messages)
 
 
 @app.get("/messages/new", response_class=HTMLResponse)

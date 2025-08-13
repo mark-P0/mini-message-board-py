@@ -11,7 +11,7 @@ class Message(BaseModel):
     added: datetime.datetime
 
 
-messages: list[Message] = [
+_messages: list[Message] = [
     Message(
         id=str(uuid4()),
         user="Amando",
@@ -41,8 +41,20 @@ const messages = {
 """
 
 
+def get_all_messages():
+    return _messages
+
+
+def get_message(message_id: str, /):
+    for message in _messages:
+        if message.id == message_id:
+            return message
+
+    return None
+
+
 def add_message(*, user: str, text: str):
-    messages.append(
+    _messages.append(
         Message(
             id=str(uuid4()),
             user=user,
@@ -50,11 +62,3 @@ def add_message(*, user: str, text: str):
             added=datetime.datetime.now(),
         )
     )
-
-
-def get_message(message_id: str, /):
-    for message in messages:
-        if message.id == message_id:
-            return message
-
-    return None
