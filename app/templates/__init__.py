@@ -7,6 +7,7 @@ import typing as T
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from app.db.messages import Message
+from app.routes.paths import RoutePath
 
 env_loader = PackageLoader(package_name="app.templates", package_path="html")
 env = Environment(loader=env_loader, autoescape=select_autoescape())
@@ -14,7 +15,10 @@ env = Environment(loader=env_loader, autoescape=select_autoescape())
 
 def render_template(template_name: str, **kwargs: T.Any):
     template = env.get_template(template_name)
-    rendered = template.render(**kwargs)
+    rendered = template.render(
+        RoutePath=RoutePath,  # Allow all route paths to be accessible in templates
+        **kwargs,
+    )
 
     return rendered
 

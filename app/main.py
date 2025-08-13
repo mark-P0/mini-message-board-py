@@ -4,8 +4,9 @@ from fastapi import FastAPI, Form, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from pydantic import BaseModel
 
-from .db.messages import Message
-from .templates import (
+from app.db.messages import Message
+from app.routes.paths import RoutePath
+from app.templates import (
     IndexTemplate,
     MessageDetailsTemplate,
     NewMessageTemplate,
@@ -31,7 +32,7 @@ class NewMessageRoute:
     def new_message(body: RequestBody):
         Message.add_one(user=body.user, text=body.text)
 
-        return "/"
+        return RoutePath.INDEX
 
 
 class NotFoundException(Exception): ...
@@ -42,7 +43,7 @@ def not_found(*_):
     return HTMLResponse(content=NotFoundTemplate.render())
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get(RoutePath.INDEX, response_class=HTMLResponse)
 def show_messages():
     """
     https://fastapi.tiangolo.com/advanced/custom-response/#html-response
