@@ -12,6 +12,13 @@ env_loader = FileSystemLoader("./templates/html")
 env = Environment(loader=env_loader, autoescape=select_autoescape())
 
 
+def render_template(template_name: str, **kwargs: T.Any):
+    template = env.get_template(template_name)
+    rendered = template.render(**kwargs)
+
+    return rendered
+
+
 class IndexTemplate:
     name = "index.html"
 
@@ -21,7 +28,15 @@ class IndexTemplate:
 
     @classmethod
     def render(cls, **kwargs: T.Unpack[Context]):
-        template = env.get_template(cls.name)
-        rendered = template.render(**kwargs)
+        return render_template(cls.name, **kwargs)
 
-        return rendered
+
+class NewMessageTemplate:
+    name = "new-message.html"
+
+    class Context(T.TypedDict):
+        title: str
+
+    @classmethod
+    def render(cls, **kwargs: T.Unpack[Context]):
+        return render_template(cls.name, **kwargs)

@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
 from messages import messages
-from templates.templates import IndexTemplate
+from templates.templates import IndexTemplate, NewMessageTemplate
 
 app = FastAPI()
 
@@ -19,6 +19,13 @@ def index():
     return IndexTemplate.render(
         title="Mini Messageboard",
         messages=messages,
+    )
+
+
+@app.get("/new", response_class=HTMLResponse)
+def new_message():
+    return NewMessageTemplate.render(
+        title="Mini Messageboard",
     )
 
 
