@@ -10,13 +10,16 @@
 
   <body class="min-h-screen grid place-items-center">
     <main class="min-w-[32rem] bg-neutral-200 p-3 space-y-4">
-      <ul>
+      <ul class="grid grid-cols-[auto_auto_1fr]">
         {% for message in messages %}
-        <li>
-          <code class="text-xs text-neutral-400 mr-2">
-            {{ message['added'] }}
-          </code>
-          <span class="font-bold"> {{ message['user'] }}: </span>
+        <li class="col-span-3 grid grid-cols-subgrid">
+          <a
+            href="/messages/{{ message['id'] }}"
+            class="place-self-center text-xs text-neutral-400 underline underline-offset-2 mr-2"
+          >
+            <code>{{ message['added'] }}</code>
+          </a>
+          <span class="font-bold mr-3"> {{ message['user'] }}: </span>
           <span> {{ message['text'] }} </span>
         </li>
         {% endfor %}
