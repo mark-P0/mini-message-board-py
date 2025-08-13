@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
 from messages import messages
-from templates.templates import render_template
+from templates.templates import IndexTemplate
 
 app = FastAPI()
 
@@ -16,7 +16,7 @@ def index():
     https://fastapi.tiangolo.com/advanced/templates/#using-jinja2templates
     """
 
-    return render_template("index.html", messages=messages)
+    return IndexTemplate.render(messages=messages)
 
 
 if __name__ == "__main__":
