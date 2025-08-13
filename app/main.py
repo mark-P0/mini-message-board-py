@@ -25,7 +25,7 @@ class NewMessageRoute:
 
     @staticmethod
     @app.post(
-        "/messages/new",
+        RoutePath.Messages.NEW,
         response_class=RedirectResponse,
         status_code=status.HTTP_303_SEE_OTHER,
     )
@@ -57,7 +57,7 @@ def show_messages():
     return IndexTemplate.render(messages=messages)
 
 
-@app.get("/messages/new", response_class=HTMLResponse)
+@app.get(RoutePath.Messages.NEW, response_class=HTMLResponse)
 def show_new_message_form():
     return NewMessageTemplate.render()
 
