@@ -6,14 +6,16 @@ from pydantic import BaseModel
 
 from app.db.messages import Message
 from app.routes.paths import RoutePath
+from app.routes.router import IndexRouter
 from app.templates import (
-    IndexTemplate,
     MessageDetailsTemplate,
     NewMessageTemplate,
     NotFoundTemplate,
 )
 
 app = FastAPI()
+
+app.include_router(IndexRouter)
 
 
 class NewMessageRoute:
@@ -41,20 +43,6 @@ class NotFoundException(Exception): ...
 @app.exception_handler(NotFoundException)
 def not_found(*_):
     return HTMLResponse(content=NotFoundTemplate.render())
-
-
-@app.get(RoutePath.INDEX, response_class=HTMLResponse)
-def show_messages():
-    """
-    https://fastapi.tiangolo.com/advanced/custom-response/#html-response
-
-    FastAPI also has a built-in templating syntax, but this seems simpler
-    https://fastapi.tiangolo.com/advanced/templates/#using-jinja2templates
-    """
-
-    messages = Message.get_all()
-
-    return IndexTemplate.render(messages=messages)
 
 
 @app.get(RoutePath.Messages.NEW, response_class=HTMLResponse)
