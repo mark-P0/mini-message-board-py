@@ -16,6 +16,7 @@ class IndexTemplate:
     name = "index.html"
 
     class Context(T.TypedDict):
+        title: str
         messages: list[Message]
 
     @classmethod

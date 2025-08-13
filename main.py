@@ -16,7 +16,10 @@ def index():
     https://fastapi.tiangolo.com/advanced/templates/#using-jinja2templates
     """
 
-    return IndexTemplate.render(messages=messages)
+    return IndexTemplate.render(
+        title="Mini Messageboard",
+        messages=messages,
+    )
 
 
 if __name__ == "__main__":
