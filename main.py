@@ -5,7 +5,11 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from pydantic import BaseModel
 
 from db.messages import add_message, messages
-from templates.templates import IndexTemplate, NewMessageTemplate
+from templates.templates import (
+    IndexTemplate,
+    NewMessageTemplate,
+    NotFoundTemplate,
+)
 
 app = FastAPI()
 
@@ -27,6 +31,14 @@ class NewMessageRoute:
         add_message(user=body.user, text=body.text)
 
         return "/"
+
+
+class NotFoundException(Exception): ...
+
+
+@app.exception_handler(NotFoundException)
+def not_found(*_):
+    return HTMLResponse(content=NotFoundTemplate.render())
 
 
 @app.get("/", response_class=HTMLResponse)

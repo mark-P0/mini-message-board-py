@@ -19,6 +19,16 @@ def render_template(template_name: str, **kwargs: T.Any):
     return rendered
 
 
+class NotFoundTemplate:
+    name = "not-found.html"
+
+    class Context(T.TypedDict): ...
+
+    @classmethod
+    def render(cls, **kwargs: T.Unpack[Context]):
+        return render_template(cls.name, **kwargs)
+
+
 class IndexTemplate:
     name = "index.html"
 
