@@ -6,7 +6,7 @@ import typing as T
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from messages import Message
+from db.messages import Message
 
 env_loader = FileSystemLoader("./templates/html")
 env = Environment(loader=env_loader, autoescape=select_autoescape())
