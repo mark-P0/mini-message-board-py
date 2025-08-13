@@ -23,7 +23,6 @@ class IndexTemplate:
     name = "index.html"
 
     class Context(T.TypedDict):
-        title: str
         messages: list[Message]
 
     @classmethod
@@ -34,8 +33,7 @@ class IndexTemplate:
 class NewMessageTemplate:
     name = "new-message.html"
 
-    class Context(T.TypedDict):
-        title: str
+    class Context(T.TypedDict): ...
 
     @classmethod
     def render(cls, **kwargs: T.Unpack[Context]):

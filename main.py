@@ -39,13 +39,10 @@ def show_messages():
     """
 
     return IndexTemplate.render(
-        title="Mini Messageboard",
         messages=messages,
     )
 
 
 @app.get("/new", response_class=HTMLResponse)
 def show_new_message_form():
-    return NewMessageTemplate.render(
-        title="Mini Messageboard",
-    )
+    return NewMessageTemplate.render()
