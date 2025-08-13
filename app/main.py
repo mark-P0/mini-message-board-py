@@ -4,7 +4,7 @@ from fastapi import FastAPI, Form, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from pydantic import BaseModel
 
-from .db.messages import add_message, get_all_messages, get_message
+from .db.messages import Message
 from .templates import (
     IndexTemplate,
     MessageDetailsTemplate,
@@ -29,7 +29,7 @@ class NewMessageRoute:
         status_code=status.HTTP_303_SEE_OTHER,
     )
     def new_message(body: RequestBody):
-        add_message(user=body.user, text=body.text)
+        Message.add_one(user=body.user, text=body.text)
 
         return "/"
 
@@ -51,7 +51,7 @@ def show_messages():
     https://fastapi.tiangolo.com/advanced/templates/#using-jinja2templates
     """
 
-    messages = get_all_messages()
+    messages = Message.get_all()
 
     return IndexTemplate.render(messages=messages)
 
@@ -63,7 +63,7 @@ def show_new_message_form():
 
 @app.get("/messages/{message_id}", response_class=HTMLResponse)
 def show_message(message_id: str):
-    message = get_message(message_id)
+    message = Message.get_one(message_id)
     if message is None:
         raise NotFoundException()
 

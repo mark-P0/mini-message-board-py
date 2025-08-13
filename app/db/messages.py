@@ -10,6 +10,29 @@ class Message(BaseModel):
     text: str
     added: datetime.datetime
 
+    @classmethod
+    def get_all(cls):
+        return _messages
+
+    @classmethod
+    def get_one(cls, message_id: str, /):
+        for message in _messages:
+            if message.id == message_id:
+                return message
+
+        return None
+
+    @classmethod
+    def add_one(cls, *, user: str, text: str):
+        message = Message(
+            id=str(uuid4()),
+            user=user,
+            text=text,
+            added=datetime.datetime.now(),
+        )
+
+        _messages.append(message)
+
 
 _messages: list[Message] = [
     Message(
@@ -39,26 +62,3 @@ const messages = {
   }
 ```
 """
-
-
-def get_all_messages():
-    return _messages
-
-
-def get_message(message_id: str, /):
-    for message in _messages:
-        if message.id == message_id:
-            return message
-
-    return None
-
-
-def add_message(*, user: str, text: str):
-    _messages.append(
-        Message(
-            id=str(uuid4()),
-            user=user,
-            text=text,
-            added=datetime.datetime.now(),
-        )
-    )
