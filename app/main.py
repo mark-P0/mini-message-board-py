@@ -62,7 +62,7 @@ def show_new_message_form():
     return NewMessageTemplate.render()
 
 
-@app.get("/messages/{message_id}", response_class=HTMLResponse)
+@app.get(RoutePath.Messages.ID, response_class=HTMLResponse)
 def show_message(message_id: str):
     message = Message.get_one(message_id)
     if message is None:

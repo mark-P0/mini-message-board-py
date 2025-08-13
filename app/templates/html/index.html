@@ -14,7 +14,7 @@
         {% for message in messages %}
         <li class="col-span-3 grid grid-cols-subgrid">
           <a
-            href="/messages/{{ message['id'] }}"
+            href="{{ RoutePath.Messages.ID.format(message_id=message['id']) }}"
             class="place-self-center text-xs text-neutral-400 underline underline-offset-2 mr-2"
           >
             <code>{{ message['added'] }}</code>
