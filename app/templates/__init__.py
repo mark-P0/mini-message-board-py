@@ -8,7 +8,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from app.db.messages import Message
 
-env_loader = FileSystemLoader("./templates/html")
+env_loader = FileSystemLoader("./app/templates/html")
 env = Environment(loader=env_loader, autoescape=select_autoescape())
 
 

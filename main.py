@@ -5,7 +5,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from pydantic import BaseModel
 
 from app.db.messages import add_message, get_message, messages
-from templates.templates import (
+from app.templates import (
     IndexTemplate,
     MessageDetailsTemplate,
     NewMessageTemplate,
